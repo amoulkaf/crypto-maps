@@ -1,9 +1,15 @@
 import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
-
 import Header from "./../../components/Header";
 import NOSActions from "./../../components/NOSActions";
+import { compose, withProps } from "recompose";
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker
+} from "react-google-maps";
 
 const styles = {
   "@import": "https://fonts.googleapis.com/css?family=Source+Sans+Pro",
@@ -26,17 +32,28 @@ const styles = {
   }
 };
 
-const App = ({ classes }) => (
-  <div className={classes.App}>
-    <Header title="A nOS dApp starter-kit!" />
-    <p className={classes.intro}>
-      To get started, edit <code>src/views/App/index.js</code> and save to reload.
-    </p>
-    <p className={classes.intro}>Or test out the following demo functions!</p>
-    <hr className={classes.lineBreak} />
-    <NOSActions />
-  </div>
-);
+const App = compose(
+  withProps({
+    /**
+     * Note: create and replace your own key in the Google console.
+     * https://console.developers.google.com/apis/dashboard
+     * The key "AIzaSyBkNaAGLEVq0YLQMi-PYEMabFeREadYe1Q" can be ONLY used in this sandbox (no forked).
+     */
+    googleMapURL:
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjtHpEQL4Bi9oLcRx0S3T1ZbI5hroqORc&v=3.exp&libraries=geometry,drawing,places",
+    loadingElement: <div style={{ height: `100%` }} />,
+  containerElement: <div style={{ height: `900px` }} />,
+    mapElement: <div style={{ height: `100%` }} />
+  }),
+  withScriptjs,
+  withGoogleMap
+)(props => (
+  <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
+    {props.isMarkerShown && (
+      <Marker position={{ lat: -34.397, lng: 150.644 }} />
+    )}
+  </GoogleMap>
+));
 
 App.propTypes = {
   classes: PropTypes.object.isRequired
