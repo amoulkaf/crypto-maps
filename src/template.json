@@ -1,0 +1,15 @@
+{
+	"country": "france",
+	"city": "paris",
+	"stores": [
+    {
+		"owner": "ATEMNPSjRVvsXmaJW4ZYJBSVuJ6uR2mjQU",
+		"Address": "23 rue de la roquette 75011 paris"
+	},
+  "stores":
+    {
+		"owner": "ATEMNPSjRVvsXmaJW4ZYJBSVuJ6uR2mjQU",
+		"Address": "23 rue de la roquette 75011 paris"
+	}
+  ]
+}
